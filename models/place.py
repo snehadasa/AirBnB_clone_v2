@@ -1,6 +1,14 @@
 #!/usr/bin/python3
 """This is the place class"""
 from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+from sqlalchemy import Float, ForeignKey
+import MySQLdb
+from os import getenv
+import models
+from models.city import City
 
 
 class Place(BaseModel):
@@ -18,7 +26,16 @@ class Place(BaseModel):
         longitude: longitude in float
         amenity_ids: list of Amenity ids
     """
-    city_id = ""
+    __tablename__ = 'places'
+
+    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+    user_id = Column(String(60), ForeignKey('user.id'), nullable=False)
+    name = Column(String(128), nullable=False)
+    description = Column(String(128), nullable=True)
+    name = Column(String(128), nullable=False)
+    name = Column(String(128), nullable=False)
+    name = Column(String(128), nullable=False)
+    name = Column(String(128), nullable=False)
     user_id = ""
     name = ""
     description = ""
