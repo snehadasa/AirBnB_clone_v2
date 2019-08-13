@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the file storage class for AirBnB"""
 import json
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from models.user import User
 from models.state import State
 from models.city import City
@@ -27,10 +27,11 @@ class DBStorage:
         """creating an engine and linking to databases
         """
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format(
-            (getenv("HBNB_MYSQL_USER"),
-             getenv("HBNB_MYSQL_PWD"),
-             getenv("HBNB_MYSQL_HOST"),
-             getenv("HBNB_MYSQL_DB"), pool_pre_ping=True)
+            getenv("HBNB_MYSQL_USER"),
+            getenv("HBNB_MYSQL_PWD"),
+            getenv("HBNB_MYSQL_HOST"),
+            getenv("HBNB_MYSQL_DB"),
+            pool_pre_ping=True))
         if getenv("HBNB_ENV") == "test":
              Base.metadata.drop_all(self.__engine)
 
@@ -53,7 +54,7 @@ class DBStorage:
         Args:
             obj: given object
         """
-            self.__session.add(obj)
+        self.__session.add(obj)
 
     def save(self):
         """serialize the file path to JSON file path

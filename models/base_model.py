@@ -7,7 +7,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import DateTime
 
-
 Base = declarative_base()
 
 
@@ -36,10 +35,10 @@ class BaseModel:
                 if key != "__class__":
                     setattr(self, key, value)
                 if id not in kwargs.keys():
-                    self.id = str(uuid.uid4())
+                    self.id = str(uuid.uuid4())
                     self.created_at = self.updated_at = datetime.now()
         else:
-            self.id = str(uuid.uid4())
+            self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
 
     def __str__(self):
