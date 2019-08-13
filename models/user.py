@@ -1,12 +1,9 @@
 #!/usr/bin/python3
 """This is the user class"""
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String
-from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 import MySQLdb
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from os import getenv
 
 
@@ -19,7 +16,9 @@ class User(BaseModel):
         last_name: last name
     """
     __tablename__ == 'users'
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
+    email = Column(String(128), nullable=False)
+    password = Column(String(128), nullable=False)
+    first_name = Column(String(128), nullable=False)
+    last_name = Column(String(128), nullable=False)
+    places = relationship("Place", backref="user")
+    reviews = relationship("Review", backref="user")
