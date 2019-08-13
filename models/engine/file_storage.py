@@ -70,6 +70,5 @@ class FileStorage:
         if obj is None:
             return
         key = str(obj.__class__.__name__) + "." + str(obj.id)
-        k = self.__objects[key]
-        del k
+        del self.__objects[key]
         self.save()
