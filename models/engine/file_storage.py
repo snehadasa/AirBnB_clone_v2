@@ -65,9 +65,12 @@ class FileStorage:
 
     def delete(self, obj=None):
         """delete obj from __objects
+           key = (arizona).id(id_created)
         """
-        if obj is None:
+        if obj:
+            key = "{}.{}".format(obj.__class__.__name__, obj.id)
+            k =  self.__objects[key]
+            del k
+            self.save()
+        else:
             return
-        key = str(obj.__class__.__name__) + "." + str(obj.id)
-        del self.__objects[key]
-        self.save()
