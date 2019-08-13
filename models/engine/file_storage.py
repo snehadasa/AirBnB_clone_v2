@@ -69,6 +69,6 @@ class FileStorage:
         """
         if obj is None:
             return
-        key = str(obj.__class__.__name__) + "." + str(obj.id)
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
         del self.__objects[key]
         self.save()
