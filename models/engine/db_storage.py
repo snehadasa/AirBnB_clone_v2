@@ -41,16 +41,6 @@ class DBStorage:
             returns list of objects of type class
         """
 
-        """empty = []
-        c_classes = ["User", "State", "City", "Amenity", "Place", "Review"]
-        if cls:
-            c_classes = [cls]
-        for cls in c_classes:
-            if type(cls) == str:
-                results = self.__session.query(eval(cls)).all()
-            else:
-                results = self.__session.query(cls).all()
-            empty.extend(results)"""
         if cls:
             empty = self.__session.query(cls).all()
         else:
