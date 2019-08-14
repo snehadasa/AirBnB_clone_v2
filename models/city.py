@@ -12,6 +12,7 @@ class City(BaseModel, Base):
         state_id: The state id
         name: input name
     """
+
     __tablename__ = 'cities'
 
     name = Column(String(128),
@@ -21,6 +22,6 @@ class City(BaseModel, Base):
                       ForeignKey('states.id'),
                       nullable=False)
 
-    #places = relationship("Place", 
-                           #backref="cities",
-                           #cascade="all, delete-orphan")
+    #places = relationship("Place",
+                          #backref="cities",
+                          #cascade="all, delete-orphan")

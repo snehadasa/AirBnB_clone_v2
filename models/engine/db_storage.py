@@ -40,14 +40,22 @@ class DBStorage:
         Return:
             returns list of objects of type class
         """
+
+        empty = []
+        c_classes = ["User", "State", "City", "Amenity", "Place", "Review"]
         if cls:
-            dic={}
-            for key, obj in self.__objects.items():
-                if isinstance(key, cls):
-                    dic[obj]=key
-            return dic
-        else:
-            return self.__objects
+            c_classes = [cls]
+        for cls in c_classes:
+            if type(cls) == str:
+                results = self.__session.query(eval(cls)).all()
+            else:
+                results = self.__session.query(cls).all()
+            empty.extend(results)
+        dic = {}
+        for obj in empty:
+            key = "{}.{}".format(cls, obj.id)
+            dic[key] = obj
+        return dic
 
     def new(self, obj):
         """sets __object to given obj
@@ -65,12 +73,12 @@ class DBStorage:
         """serialize the file path to JSON file path
         """
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        self.__session = scoped_session(Session)
+        Session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))
+        self.__session = Session()
 
     def delete(self, obj=None):
         """delete obj from __session
            key = (arizona).id(id_created)
         """
-        if obj is not None:
+        if obj:
             self.__session.delete(obj)
