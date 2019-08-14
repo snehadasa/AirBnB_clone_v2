@@ -3,7 +3,7 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from sqlalchemy import Float, ForeignKey, Table
+from sqlalchemy import Float, ForeignKey, Table, String, DateTime
 import MySQLdb
 from os import getenv
 from models.city import City
@@ -45,9 +45,30 @@ class Place(BaseModel, Base):
     longitude = Column(Float, nullable=True)
     amenity_ids = []
 
-    reviews = relationship("Review", backref="place",
-                          cascade='all, delete-orphan')
-    amenities = relationship("Amenity", backref='places', viewonly=False)
+    if getenv("HBNB_TYPE_STORAGE") == 'db':
+        reviews = relationship("Review", backref="place",
+                               cascade='all, delete-orphan')
+        amenities = relationship("Amenity",
+                                 backref='places', viewonly=False)
 
-    @property
-    def amenities(self):
+    elif getenv("HBNB_TYPE_STORAGE") == 'file':
+        @property
+        def reviews(self):
+            new = []
+            for r in self.reviews:
+                if r.place_id == self.id:
+                    new.append(r)
+            return new
+
+        @property
+        def amenities(self):
+            new = []
+            for obj in amenity_ids:
+                if obj.id == self.id:
+                    new.append(obj)
+            return new
+
+        @amenities.setter
+        def amenities(self, obj):
+            if type(obj) == 'Amenity':
+                self.amenity_ids.append(obj.id)

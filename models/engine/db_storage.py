@@ -73,7 +73,8 @@ class DBStorage:
         """serialize the file path to JSON file path
         """
         Base.metadata.create_all(self.__engine)
-        Session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))
+        Session = scoped_session(sessionmaker(bind=self.__engine,
+                                 expire_on_commit=False))
         self.__session = Session()
 
     def delete(self, obj=None):
