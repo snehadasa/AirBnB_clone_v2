@@ -40,14 +40,21 @@ class DBStorage:
         Return:
             returns list of objects of type class
         """
+
+        empty = []
+        c_classes = ["User", "State", "City", "Amenity", "Place"]
         if cls:
-            dic={}
-            for key, obj in self.__objects.items():
-                if isinstance(key, cls):
-                    dic[obj]=key
-            return dic
-        else:
-            return self.__objects
+            c_classes = [cls]
+        for cls in c_classes:
+            if type(cls) == str:
+                results = self.__session.query(eval(cls)).all()
+            else:
+                results = self.__session.query(cls).all()
+            empty.extend(results)
+        dic = {}
+        for obj in empty:
+            dic["{}.{}".format(cls, obj.id)] = obj
+        return dic
 
     def new(self, obj):
         """sets __object to given obj
