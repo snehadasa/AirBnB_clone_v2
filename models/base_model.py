@@ -14,7 +14,7 @@ class BaseModel:
     """This class will defines all common attributes/methods
     for other classes
     """
-    id = Column(String(60), nullable=False, primary_key=True)
+    id = Column(String(60), primary_key=True, nullable=False)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
@@ -34,6 +34,13 @@ class BaseModel:
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
                     setattr(self, key, value)
+
+            if self.id is None:
+                setattr(self, 'id', str(uuid.uuid4()))
+            if self.created_at is None:
+                self.created_at = datetime.now()
+            if self.updated_at is None:
+                self.updated_at = datetime.now()
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
@@ -55,7 +62,7 @@ class BaseModel:
         """updates the public instance attribute updated_at to current
         """
         self.updated_at = datetime.now()
-        models.storage.new(sef)
+        models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):
