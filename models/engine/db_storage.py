@@ -43,14 +43,19 @@ class DBStorage:
 
         empty = []
         c_classes = ["User", "State", "City", "Amenity", "Place", "Review"]
-        if cls:
+        """if cls:
             c_classes = [cls]
         for cls in c_classes:
             if type(cls) == str:
                 results = self.__session.query(eval(cls)).all()
             else:
                 results = self.__session.query(cls).all()
-            empty.extend(results)
+            empty.extend(results)"""
+        if cls:
+            empty = self.__session.query(eval(cls)).all()
+        else:
+            empty = self.__session.query(State).all()
+            empty = self.__session.query(City).all()
         dic = {}
         for obj in empty:
             key = "{}.{}".format(cls, obj.id)
