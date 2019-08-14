@@ -42,7 +42,7 @@ class DBStorage:
         """
 
         empty = []
-        c_classes = ["User", "State", "City", "Amenity", "Place"]
+        c_classes = ["User", "State", "City", "Amenity", "Place", "Review"]
         if cls:
             c_classes = [cls]
         for cls in c_classes:
@@ -53,7 +53,8 @@ class DBStorage:
             empty.extend(results)
         dic = {}
         for obj in empty:
-            dic["{}.{}".format(cls, obj.id)] = obj
+            key = "{}.{}".format(cls, obj.id)
+            dic[key] = obj
         return dic
 
     def new(self, obj):
@@ -72,12 +73,12 @@ class DBStorage:
         """serialize the file path to JSON file path
         """
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        self.__session = scoped_session(Session)
+        Session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))
+        self.__session = Session()
 
     def delete(self, obj=None):
         """delete obj from __session
            key = (arizona).id(id_created)
         """
-        if obj is not None:
+        if obj:
             self.__session.delete(obj)
