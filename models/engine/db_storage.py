@@ -41,9 +41,9 @@ class DBStorage:
             returns list of objects of type class
         """
 
-        empty = []
+        """empty = []
         c_classes = ["User", "State", "City", "Amenity", "Place", "Review"]
-        """if cls:
+        if cls:
             c_classes = [cls]
         for cls in c_classes:
             if type(cls) == str:
@@ -52,7 +52,7 @@ class DBStorage:
                 results = self.__session.query(cls).all()
             empty.extend(results)"""
         if cls:
-            empty = self.__session.query(eval(cls)).all()
+            empty = self.__session.query(cls)
         else:
             empty = self.__session.query(State).all()
             empty += self.__session.query(City).all()
