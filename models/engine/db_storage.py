@@ -52,14 +52,15 @@ class DBStorage:
                 results = self.__session.query(cls).all()
             empty.extend(results)"""
         if cls:
-            empty = self.__session.query(cls)
+            empty = self.__session.query(cls).all()
         else:
             empty = self.__session.query(State).all()
             empty += self.__session.query(City).all()
         dic = {}
         for obj in empty:
-            key = "{}.{}".format(cls, obj.id)
+            key = "{}.{}".format(type(obj).__name__, obj.id)
             dic[key] = obj
+        print(dic)
         return dic
 
     def new(self, obj):

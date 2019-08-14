@@ -2,7 +2,7 @@
 """This is the state class"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 from os import getenv
 
 
@@ -24,9 +24,7 @@ class State(BaseModel, Base):
     if getenv("HBNB_TYPE_STORAGE") == "db":
         @property
         def cities():
-
             empty = []
-
             for value in self.cities:
                 if value.state_id == self.id:
                     empty.append(value)
