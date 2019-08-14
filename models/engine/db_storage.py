@@ -55,7 +55,7 @@ class DBStorage:
             empty = self.__session.query(eval(cls)).all()
         else:
             empty = self.__session.query(State).all()
-            empty = self.__session.query(City).all()
+            empty += self.__session.query(City).all()
         dic = {}
         for obj in empty:
             key = "{}.{}".format(cls, obj.id)
