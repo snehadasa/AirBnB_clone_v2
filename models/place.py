@@ -5,6 +5,8 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from sqlalchemy import Float, ForeignKey, Table
 from os import getenv
+from models.review import Review
+import models
 
 
 if getenv("HBNB_TYPE_STORAGE") == "db":

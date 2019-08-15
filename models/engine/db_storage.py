@@ -55,7 +55,7 @@ class DBStorage:
         for obj in empty:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             dic[key] = obj
-        print(dic)
+        #print(dic)
         return dic
 
     def new(self, obj):
