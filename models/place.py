@@ -49,7 +49,7 @@ class Place(BaseModel, Base):
         reviews = relationship("Review", backref="place",
                                cascade='all, delete-orphan')
         amenities = relationship("Amenity", secondary='place_amenity',
-                                 backref='place', viewonly=False)
+                                 backref='places', viewonly=False)
 
     elif getenv("HBNB_TYPE_STORAGE") == 'file':
         @property
