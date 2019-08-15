@@ -68,7 +68,7 @@ class Place(BaseModel, Base):
             """getter amenities"""
             new = []
             for obj in models.storage.all(Amenity):
-                if obj.id == self.id:
+                if obj.id in amenity_ids:
                     new.append(obj)
             return new
 
