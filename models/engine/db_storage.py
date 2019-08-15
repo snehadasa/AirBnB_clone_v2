@@ -49,7 +49,7 @@ class DBStorage:
             empty += self.__session.query(User).all()
             empty += self.__session.query(Place).all()
             empty += self.__session.query(Review).all()
-            #empty += self.__session.query(Amenity).all()
+            empty += self.__session.query(Amenity).all()
 
         dic = {}
         for obj in empty:

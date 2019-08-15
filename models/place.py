@@ -3,18 +3,17 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from sqlalchemy import Float, ForeignKey, Table, String, DateTime
-import MySQLdb
+from sqlalchemy import Float, ForeignKey, Table
 from os import getenv
 from models.city import City
 
 
-"""
 place_amenity = Table('place_amenity', Base.metadata, Column('place_id',
                       String(60), ForeignKey('places.id'), primary_key=True,
                       nullable=False),
-                      Column('amenity_id', String(60), ForeignKey(amenities.id),
-                      primary_key=True, nullable=False))"""
+                      Column('amenity_id', String(60),
+                      ForeignKey("amenities.id"),
+                      primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -44,36 +43,36 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
-    #amenity_ids = []
+    amenity_ids = []
 
     if getenv("HBNB_TYPE_STORAGE") == 'db':
         reviews = relationship("Review", backref="place",
                                cascade='all, delete-orphan')
-        #amenities = relationship("Amenity",
-                                 #backref='places', viewonly=False)
+        amenities = relationship("Amenity", secondary='place_amenity',
+                                 backref='place', viewonly=False)
 
     elif getenv("HBNB_TYPE_STORAGE") == 'file':
         @property
         def reviews(self):
+            """getter that returns review instance"""
             new = []
             for r in self.reviews:
                 if r.place_id == self.id:
                     new.append(r)
             return new
 
-    """
         @property
         def amenities(self):
+            """getter amenities"""
             new = []
-            for obj in amenity_ids:
+            for obj in self.amenity_ids:
                 if obj.id == self.id:
                     new.append(obj)
             return new
-    """
-    """
+
         @amenities.setter
         def amenities(self, obj):
-            if type(obj) == 'Amenity':
+            """setter amenities"""
+            if type(obj).__name__ == 'Amenity':
                 self.amenity_ids.append(obj.id)
 
-    """
