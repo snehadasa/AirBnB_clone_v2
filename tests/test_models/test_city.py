@@ -22,7 +22,7 @@ class TestCity(unittest.TestCase):
         """at the end of the test this will tear it down"""
         del cls.city
 
-    @unittest.skip("demonstrating skipping")
+
     def tearDown(self):
         """teardown"""
         try:
@@ -30,14 +30,14 @@ class TestCity(unittest.TestCase):
         except Exception:
             pass
 
-    @unittest.skip("demonstrating skipping")
+
     def test_pep8_City(self):
         """Tests pep8 style"""
         style = pep8.StyleGuide(quiet=True)
         p = style.check_files(['models/city.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
-    @unittest.skip("demonstrating skipping")
+
     def test_checking_for_docstring_City(self):
         """checking for docstrings"""
         self.assertIsNotNone(City.__doc__)
