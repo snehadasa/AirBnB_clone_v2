@@ -75,4 +75,3 @@ class Place(BaseModel, Base):
             """setter amenities"""
             if type(obj).__name__ == 'Amenity':
                 self.amenity_ids.append(obj.id)
-
