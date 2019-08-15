@@ -67,6 +67,15 @@ class TestCity(unittest.TestCase):
         """test if dictionary works"""
         self.assertEqual('to_dict' in dir(self.city), True)
 
+    def test_for_created_attr(self):
+        """test if the City class has the attribute -created_at"""
+        inst = City()
+        self.assertTrue(hasattr(inst, "created_at"))
+
+    def test_for_updated_attr(self):
+        """test if the City class has the attribute -updated_at"""
+        inst = City()
+        self.assertTrue(hasattr(inst, "updated_at"))
 
 if __name__ == "__main__":
     unittest.main()
