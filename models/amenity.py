@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import ForeignKey
 import MySQLdb
 from os import getenv
+from models.place import place_amenity
 
 
 class Amenity(BaseModel, Base):
