@@ -51,7 +51,7 @@ class Place(BaseModel, Base):
         amenities = relationship("Amenity", secondary='place_amenity',
                                  backref='places', viewonly=False)
 
-    elif getenv("HBNB_TYPE_STORAGE") == 'file':
+    else:
         @property
         def reviews(self):
             """getter that returns review instance"""
