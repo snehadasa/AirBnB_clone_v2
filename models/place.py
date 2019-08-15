@@ -58,7 +58,7 @@ class Place(BaseModel, Base):
         def reviews(self):
             """getter that returns review instance"""
             new = []
-            for r in self.reviews:
+            for r in models.storage.all(Review):
                 if r.place_id == self.id:
                     new.append(r)
             return new
@@ -67,7 +67,7 @@ class Place(BaseModel, Base):
         def amenities(self):
             """getter amenities"""
             new = []
-            for obj in self.amenity_ids:
+            for obj in models.storage.all(Amenity):
                 if obj.id == self.id:
                     new.append(obj)
             return new
