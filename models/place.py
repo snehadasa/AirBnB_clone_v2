@@ -7,6 +7,7 @@ from sqlalchemy import Float, ForeignKey, Table, String, DateTime
 import MySQLdb
 from os import getenv
 from models.city import City
+from models.user import User
 
 """
 place_amenity = Table('place_amenity', Base.metadata, Column('place_id',
