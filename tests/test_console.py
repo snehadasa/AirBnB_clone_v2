@@ -32,7 +32,6 @@ class TestConsole(unittest.TestCase):
         """at the end of the test this will tear it down"""
         del cls.consol
 
-    @unittest.skip("demonstrating skipping")
     def tearDown(self):
         """Remove temporary file (file.json) created as a result"""
         try:
@@ -40,14 +39,12 @@ class TestConsole(unittest.TestCase):
         except Exception:
             pass
 
-    @unittest.skip("demonstrating skipping")
     def test_pep8_console(self):
         """Pep8 console.py"""
         style = pep8.StyleGuide(quiet=True)
         p = style.check_files(["console.py"])
         self.assertEqual(p.total_errors, 0, 'fix Pep8')
 
-    @unittest.skip("demonstrating skipping")
     def test_docstrings_in_console(self):
         """checking for docstrings"""
         self.assertIsNotNone(console.__doc__)
@@ -63,14 +60,12 @@ class TestConsole(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.strip_clean.__doc__)
         self.assertIsNotNone(HBNBCommand.default.__doc__)
 
-    @unittest.skip("demonstrating skipping")
     def test_emptyline(self):
         """Test empty line input"""
         with patch('sys.stdout', new=StringIO()) as f:
             self.consol.onecmd("\n")
             self.assertEqual('', f.getvalue())
 
-    @unittest.skip("demonstrating skipping")
     def test_quit(self):
         """test quit command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -95,7 +90,6 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "[[User]", f.getvalue()[:7])
 
-    @unittest.skip("demonstrating skipping")
     def test_show(self):
         """Test show command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -115,7 +109,6 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "** no instance found **\n", f.getvalue())
 
-    @unittest.skip("demonstrating skipping")
     def test_destroy(self):
         """Test destroy command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -175,7 +168,6 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "** value missing **\n", f.getvalue())
 
-    @unittest.skip("demonstrating skipping")
     def test_z_all(self):
         """Test alternate all command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
