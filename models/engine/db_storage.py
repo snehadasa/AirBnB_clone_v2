@@ -33,7 +33,7 @@ class DBStorage:
             getenv("HBNB_MYSQL_DB"),
             pool_pre_ping=True))
         if getenv("HBNB_ENV") == "test":
-             Base.metadata.drop_all(self.__engine)
+            Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """returns list of objects
@@ -55,7 +55,7 @@ class DBStorage:
         for obj in empty:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             dic[key] = obj
-        #print(dic)
+
         return dic
 
     def new(self, obj):
