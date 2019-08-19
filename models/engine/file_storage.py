@@ -28,7 +28,7 @@ class FileStorage:
         if cls:
             dic = {}
             for key, obj in self.__objects.items():
-                if isinstance(key, cls):
+                if isinstance(obj, cls):
                     dic[obj] = key
             return dic
         else:
