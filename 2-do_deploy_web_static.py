@@ -6,8 +6,8 @@ from fabric.operations import local
 from datetime import datetime
 
 
-def do_pack(archive_path):
-    """Deploy archive"""
+def do_pack():
+    """Compress before sending"""
     try:
         local("mkdir -p versions")
         l = local("tar -cvzf versions/web_static_{}.tgz web_static/"
@@ -15,3 +15,6 @@ def do_pack(archive_path):
         return l
     except Exception:
         return None
+
+def do_deploy(archive_path):
+    """ Deploy archive!"""
