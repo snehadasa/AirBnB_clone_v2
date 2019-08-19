@@ -14,13 +14,13 @@ env.hosts = ['35.229.72.201', '35.237.176.253']
 
 def do_pack():
     """Compress before sending"""
-    try:
-        local("mkdir -p versions")
-        l = local("tar -cvzf versions/web_static_{}.tgz web_static/"
-                  .format(datetime.strftime(datetime.now(), "%Y%m%d%H%M%S")))
-        return l
-    except Exception:
+    local("mkdir -p versions")
+    name = "versions/web_static_{}.tgz".format(datetime.now().strftime
+                                               ("%Y%m%d%H%M%S"))
+    l = local("tar -cvzf {} web_static".format(name))
+    if l.failed:
         return None
+    return name
 
 
 def do_deploy(archive_path):
