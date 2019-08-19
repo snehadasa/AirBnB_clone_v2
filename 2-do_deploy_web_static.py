@@ -41,7 +41,7 @@ def do_deploy(archive_path):
     if exe.failed:
         return False
     exe = run("mv /data/web_static/releases/{}/web_static/*\
-              /data/web_static/releases/{}/".format(a_file))
+              /data/web_static/releases/{}/".format(a_file, a_file))
     if exe.failed:
         return False
     exe = run("rm -rf /data/web_static/releases/{}/web_static".format(a_file))
