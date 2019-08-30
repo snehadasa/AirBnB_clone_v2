@@ -42,7 +42,7 @@ class DBStorage:
         """
 
         if cls:
-            empty = self.__session.query(cls).all()
+            empty = self.__session.query(eval(cls)).all()
         else:
             empty = self.__session.query(State).all()
             empty += self.__session.query(City).all()
@@ -86,6 +86,6 @@ class DBStorage:
             self.__session.delete(obj)
 
     def close(self):
-        """call remove() method on the private session attribute(self.__session)
+        """call close() method on the private session attribute(self.__session)
         """
-        return self.__session.remove()
+        return self.__session.close()
