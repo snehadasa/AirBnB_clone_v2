@@ -29,7 +29,7 @@ class FileStorage:
             dic = {}
             for key, obj in self.__objects.items():
                 if isinstance(obj, cls):
-                    dic[obj] = key
+                    dic[key] = obj
             return dic
         else:
             return self.__objects
