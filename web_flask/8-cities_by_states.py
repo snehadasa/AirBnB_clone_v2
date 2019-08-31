@@ -9,9 +9,9 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 
-@app.route('/states_list')
-def states_list():
-    """render template 7-number.html"""
+@app.route('/cities_by_states')
+def cities_by_state():
+    """render template 8-cities_by_states.html"""
     return render_template('8-cities_by_states.html', states=storage.all('State').values())
 
 @app.teardown_appcontext
