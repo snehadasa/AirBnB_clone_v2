@@ -19,12 +19,12 @@ class State(BaseModel, Base):
     name = Column(String(128),
                   nullable=False)
 
-    if getenv("HBNB_TYPE_STORAGE") == "db":
-        cities = relationship("City",
-                              backref="state",
-                              cascade="all, delete-orphan")
+    # if getenv("HBNB_TYPE_STORAGE") == "db":
+    cities = relationship("City",
+                          backref="state",
+                          cascade="all, delete-orphan")
 
-    else:
+    if getenv("HBNB_TYPE_STORAGE") == "db":
         @property
         def cities(self):
             empty = []
@@ -33,11 +33,11 @@ class State(BaseModel, Base):
                     empty.append(value)
             return(empty)
 
-"""    else:
+    else:
         @property
         def cities(self):
             empty = []
             for n, value in models.storage.all(City).items():
                 if value.state_id == self.id:
                     empty.append(value)
-            return(empty)"""
+            return(empty)
