@@ -26,8 +26,7 @@ def states_id(id):
         s_key = "{}.{}".format('State', id)
         if s_key not in states:
             s_key = None
-            states = None
-    return render_template('9-states.html', states=states, s_key=s_key)
+    return render_template('9-states.html', states=states, s_key=s_key, id=id)
 
 
 @app.teardown_appcontext
