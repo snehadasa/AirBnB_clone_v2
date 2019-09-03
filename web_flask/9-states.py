@@ -27,11 +27,6 @@ def states_id(id):
         if s_key not in states:
             s_key = None
             states = None
-    #if id:
-    #    if s_key in states:
-    #       states = states[s_key]
-    #  else:
-    #     states = None
     return render_template('9-states.html', states=states, s_key=s_key)
 
 
