@@ -12,7 +12,9 @@ app.url_map.strict_slashes = False
 @app.route('/states_list')
 def states_list():
     """render template 7-number.html"""
-    return render_template('7-states_list.html', states=storage.all('State').values())
+    return render_template('7-states_list.html',
+                           states=storage.all('State').values())
+
 
 @app.teardown_appcontext
 def app_teardown(self):
